@@ -1,12 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <header class="header">
+        <h1>Weather Dashboard </h1>
+    </header>
+
+    <aside class="col-3 ">
+        <h2>Search for a City:</h2>
+        <input id="search-input" placeholder="San Diego"></input>
+        <ul id="search-history">
+        </ul>
+    </aside>
+
+    <section class="col-9 weather">
+        <div class="row current">
+            <h2 class="current-weather"> </h2>
+            <div class="card">
+                <h5 class="date">4/12</h5>
+                <div class="card-body">
+                    <image id="icon">icon</image>
+                    <p id="temp">temp:72</p>
+                    <p id="wind">Wind: yes</p>
+                    <p id="humidity">Humidity: 50%</p>
+                </div>
+            </div>
+        </div>
+        <div class="row card-group future">
+            <h2> 5 Day Forecast:</h2>
+            <div class="card">
+                <h5 class="date">Date</h5>
+                <div class="card-body">
+                    <image id="icon"></image>
+                    <p id="temp">Temp:</p>
+                    <p id="wind">Wind:</p>
+                    <p id="humidity">Humidity:</p>
+                </div>
+            </div>
+            <div class="card">
+                <h5 class="date">Date</h5>
+                <div class="card-body">
+                    <image id="icon"></image>
+                    <p id="temp">Temp:</p>
+                    <p id="wind">Wind:</p>
+                    <p id="humidity">Humidity:</p>
+                </div>
+            </div>
+            <div class="card">
+                <h5 class="date">Date</h5>
+                <div class="card-body">
+                    <image id="icon"></image>
+                    <p id="temp">Temp:</p>
+                    <p id="wind">Wind:</p>
+                    <p id="humidity">Humidity:</p>
+                </div>
+            </div>
+            <div class="card">
+                <h5 class="date">Date</h5>
+                <div class="card-body">
+                    <image id="icon"></image>
+                    <p id="temp">Temp:</p>
+                    <p id="wind">Wind:</p>
+                    <p id="humidity">Humidity:</p>
+                </div>
+            </div>
+            <div class="card">
+                <h5 class="date">Date</h5>
+                <div class="card-body">
+                    <image id="icon"></image>
+                    <p id="temp">Temp:</p>
+                    <p id="wind">Wind:</p>
+                    <p id="humidity">Humidity:</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 </body>
+
 </html>
