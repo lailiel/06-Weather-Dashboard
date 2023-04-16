@@ -20,8 +20,8 @@
     <content class="row ">
         <aside class="col-3 mx-2">
             <h4 class="p2 mb-3">Search for a City:</h4>
-            <input class="input-group w-100 mb-3" placeholder="San Diego"></input>
-            <button class="btn btn-primary btn-block mb-3 p-1">Search</button>
+            <input class="input-group w-100 mb-3" id="input" placeholder="San Diego"></input>
+            <button class="btn btn-primary btn-block mb-3 p-1" id="search">Search</button>
             <ul class="search-history list-group border-top border-dark pt-3">
                 <li class="past-search list-group-item w-100 text-dark text-center p-1"></li>
             </ul>
@@ -37,38 +37,38 @@
                 </div>
             </div>
             <h4 class="my-2"> 5 Day Forecast:</h4>
-            <div class="row card-group future">
-                <div class="card text-white p-2 rounded-0 ">
+            <div class="row card-group" id="future">
+                <div class="card text-white p-2 rounded-0" id="day1">
                     <h6 class="date ">Date</h6>
-                    <image id="icon">icon</image>
+                    <image id="icon"></image>
                     <p class="temp m-0 py-1">Temp:</p>
                     <p class="wind m-0 py-1">Wind:</p>
                     <p class="humidity m-0 py-1">Humidity:</p>
                 </div>
-                <div class="card text-white p-2 mx-3">
+                <div class="card text-white rounded-0 p-2 mx-3 day2"id="day2">
                     <h6 class="date ">Date</h6>
-                    <image id="icon">icon</image>
+                    <image id="icon"></image>
                     <p class="temp m-0 py-1">Temp:</p>
                     <p class="wind m-0 py-1">Wind:</p>
                     <p class="humidity m-0 py-1">Humidity:</p>
                 </div>
-                <div class="card text-white p-2">
+                <div class="card rounded-0 text-white p-2 day3"id="day3">
                     <h6 class="date ">Date</h6>
-                    <image id="icon">icon</image>
+                    <image id="icon"></image>
                     <p class="temp m-0 py-1">Temp:</p>
                     <p class="wind m-0 py-1">Wind:</p>
                     <p class="humidity m-0 py-1">Humidity:</p>
                 </div>
-                <div class="card text-white mx-3 p-2">
+                <div class="card rounded-0 text-white mx-3 p-2 day4"id="day4">
                     <h6 class="date ">Date</h6>
-                    <image id="icon">icon</image>
+                    <image id="icon"></image>
                     <p class="temp m-0 py-1">Temp:</p>
                     <p class="wind m-0 py-1">Wind:</p>
                     <p class="humidity m-0 py-1">Humidity:</p>
                 </div>
-                <div class="card text-white p-2 rounded-0">
+                <div class="card rounded-0 text-white p-2 rounded-0 day5"id="day5">
                     <h6 class="date ">Date</h6>
-                    <image id="icon">icon</image>
+                    <image id="icon"></image>
                     <p class="temp m-0 py-1">Temp:</p>
                     <p class="wind m-0 py-1">Wind:</p>
                     <p class="humidity m-0 py-1">Humidity:</p>
@@ -76,7 +76,8 @@
             </div>
         </section>
     </content>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./Assets/script.js"></script>
 </body>
 
 </html>
