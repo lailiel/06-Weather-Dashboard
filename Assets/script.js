@@ -1,19 +1,44 @@
-// var cityName = $("#input").textcontent
 
-var cityName = "Milwaukee"
-var search = $(".input-group")
+$("#search").on('click', function () {
 
-
-
-$('#search').on('click', generateForecast())
+    generateForecast()
+})
 
 
 
+// ----------------------------------------------------------------------------------------
 
 
 
 
 function generateForecast() {
+
+    var input = $('#input')
+    var cityName = input.val();
+    var searchList = []
+
+    // ---------------------------
+
+    searchList = JSON.parse(localStorage.getItem("searchList") || "[]");
+    searchList.push(cityName)
+
+    localStorage.setItem("searchList", JSON.stringify(searchList))
+
+    var searchDisplay = JSON.parse(localStorage.getItem("searchList"));
+
+
+
+    for (i = 0; i < searchDisplay.length; i++) {
+        var listItem = $('#search-list').appendChild("li")
+        listItem.textContent = cityName
+        displayList.appendChild(listItem)
+
+    }
+
+    // ---------------------------
+
+
+
     const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=acbf659b6dad995f4221a78b638e6923`;
     fetch(weatherUrl).then(function (response) {
         if (!response.ok) {
@@ -34,30 +59,31 @@ function generateForecast() {
             });
 
             var days = 0
-            
+
             for (i = 0; i < 6; i++) {
 
-               
+
                 var dateEl = $("#future").children().eq(days).children().eq(0)
                 var weatherIconEl = $("#future").children().eq(days).children().eq(1)
                 var tempEl = $("#future").children().eq(days).children().eq(2)
                 var windEl = $("#future").children().eq(days).children().eq(3)
                 var humidityEl = $("#future").children().eq(days).children().eq(4)
+
+
                 temp = `Temp: ${fiveDayData[i].main.temp.toFixed(2)}°F`;
                 tempEl.text(temp)
 
                 wind = `Wind: ${fiveDayData[i].wind.speed}mph`;
                 windEl.text(wind)
 
-                humidity = (`Humidity: ${fiveDayData[i].main.humidity}%`);
+                humidity = `Humidity: ${fiveDayData[i].main.humidity}%`;
                 humidityEl.text(humidity)
 
                 date = fiveDayData[i].dt_txt.split(" ")[0].replaceAll("-", "/");
                 dateEl.text(date)
 
                 weatherIcon = fiveDayData[i].weather[0].icon;
-                weatherIconEl.text(weatherIcon)
-                console.log(days)
+                weatherIconEl.attr("src", 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png')
                 days++
             }
         });
