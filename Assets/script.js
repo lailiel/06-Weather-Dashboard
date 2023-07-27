@@ -1,4 +1,8 @@
+var cityName = "";
+
 $("#search").on("click", function () {
+  var input = $("#input");
+  cityName = input.val().trim();
   generateForecast();
 });
 
@@ -6,7 +10,9 @@ $("#clear").on("click", function () {
   clearHistory();
 });
 
-$("#past-search").on("click", function () {
+$("#search-list").on("click", function (event) {
+  var pastSearch = $(event.target);
+  cityName = pastSearch.text();
   generateForecast();
 });
 
@@ -20,13 +26,11 @@ function clearHistory() {
 // ----------------------------------------------------------------------------------------
 
 function generateForecast() {
-  var input = $("#input");
   var searchList = [];
   var searchDisplay = $("#search-list");
 
   searchList = JSON.parse(localStorage.getItem("searchList") || "[]");
 
-  var cityName = input.val().trim();
   if (cityName !== "") {
     searchList.unshift(cityName);
   }
@@ -38,7 +42,7 @@ function generateForecast() {
 
   for (var i = 0; i < Math.min(searchList.length, 5); i++) {
     var listItem = $(
-      '<button class="btn btn-primary btn-block mb-3 p-1" id="past-search"></button>'
+      '<button class="btn btn-primary btn-block mb-3 p-1 past-search" id="past-search"></button>'
     ).text(searchList[i]);
     searchDisplay.append(listItem);
   }
@@ -85,8 +89,11 @@ function generateForecast() {
       humidity = `Humidity: ${fiveDayData[0].main.humidity}%`;
       humidityElCurrent.text(humidity);
 
-        weatherIcon = fiveDayData[0].weather[0].icon;
-        weatherIconElCurrent.attr("src", 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png')
+      weatherIcon = fiveDayData[0].weather[0].icon;
+      weatherIconElCurrent.attr(
+        "src",
+        "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
+      );
 
       var days = 0;
 
@@ -107,8 +114,8 @@ function generateForecast() {
         humidityEl.text(humidity);
 
         var date = new Date();
-        
-        date.setDate(date.getDate()+ 1 +  i) 
+
+        date.setDate(date.getDate() + 1 + i);
 
         var formattedDate = date.toLocaleDateString();
 
