@@ -2,6 +2,22 @@ $("#search").on("click", function () {
   generateForecast();
 });
 
+$("#clear").on("click", function() {
+    clearHistory();
+});
+
+
+$("#past-search").on("click", function() {
+    generateForecast();
+})
+
+// ----------------------------------------------------------------------------------------
+
+function clearHistory(){
+    localStorage.clear();
+    location.reload();
+}
+
 // ----------------------------------------------------------------------------------------
 
 function generateForecast() {
@@ -9,7 +25,7 @@ function generateForecast() {
   var searchList = [];
   var searchDisplay = $("#search-list");
 
-  // ---------------------------
+
 
   searchList = JSON.parse(localStorage.getItem("searchList") || "[]");
 
@@ -23,12 +39,12 @@ function generateForecast() {
 
   searchDisplay.empty();
 
-  for (var i = 0; i < searchList.length; i++) {
-    var listItem = $('<li></li>').text(searchList[i]);
+  for (var i = 0; i < 5; i++) {
+    var listItem = $('<button class="btn btn-primary btn-block mb-3 p-1" id="past-search"></button>').text(searchList[i]);
     searchDisplay.prepend(listItem);
   }
 
-  // ---------------------------
+  // ----------------------------------------------------------------------------------------
 
   const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=acbf659b6dad995f4221a78b638e6923`;
   fetch(weatherUrl).then(function (response) {
@@ -49,9 +65,9 @@ function generateForecast() {
         }
       });
 
-      // var currentDate= moment().format('L');
+    //   var currentDate= moment().format('L');
 
-      // var dateElCurrent = $("#current").children(0)
+    //   var dateElCurrent = $("#current").children().eq(0);
       // var weatherIconElCurrent = $("#current").children(0)
       // var tempElCurrent = $("#current").children(0))
       // var windElCurrent = $("#current").children(0)
@@ -68,14 +84,14 @@ function generateForecast() {
 
       // date = data.dt_txt.split(" ")[0].replaceAll("-", "/");
 
-      // dateElCurrent.text(currentDate)
+    //   dateElCurrent.text("test")
 
       //     weatherIcon = fiveDayData[i].weather[0].icon;
       //     weatherIconElCurrent.attr("src", 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png')
 
       var days = 0;
 
-      for (i = 1; i < 7; i++) {
+      for (i = 0; i < 7; i++) {
         var dateEl = $("#future").children().eq(days).children().eq(0);
         var weatherIconEl = $("#future").children().eq(days).children().eq(1);
         var tempEl = $("#future").children().eq(days).children().eq(2);

@@ -16,6 +16,6 @@ background-image: linear-gradient(to right, #465AB8 , #261360);
     background-color: var(--search-btn);
 }
 
-.past-search {
+#past-search {
     background-color: var(--previous);
 }
