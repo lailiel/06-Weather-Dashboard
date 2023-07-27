@@ -51,11 +51,11 @@ function generateForecast() {
 
       // var currentDate= moment().format('L');
 
-      // var dateElCurrent = $("#current").children(1)
-      // var weatherIconElCurrent = $("#current").children(2)
-      // var tempElCurrent = $("#current").children(3)
-      // var windElCurrent = $("#current").children(4)
-      // var humidityElCurrent = $("#current").children(5)
+      // var dateElCurrent = $("#current").children(0)
+      // var weatherIconElCurrent = $("#current").children(0)
+      // var tempElCurrent = $("#current").children(0))
+      // var windElCurrent = $("#current").children(0)
+      // var humidityElCurrent = $("#current").children(0)
 
       //     temp = `Temp: ${fiveDayData[i].main.temp.toFixed(2)}°F`;
       //     tempElCurrent.text(temp)
@@ -75,7 +75,7 @@ function generateForecast() {
 
       var days = 0;
 
-      for (i = 0; i < 6; i++) {
+      for (i = 1; i < 7; i++) {
         var dateEl = $("#future").children().eq(days).children().eq(0);
         var weatherIconEl = $("#future").children().eq(days).children().eq(1);
         var tempEl = $("#future").children().eq(days).children().eq(2);
