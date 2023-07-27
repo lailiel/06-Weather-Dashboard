@@ -31,7 +31,7 @@ function generateForecast() {
 
   var cityName = input.val().trim();
   if (cityName !== "") {
-    searchList.push(cityName);
+    searchList.unshift(cityName);
   }
 
   localStorage.setItem("searchList", JSON.stringify(searchList));
@@ -39,9 +39,9 @@ function generateForecast() {
 
   searchDisplay.empty();
 
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < Math.min(searchList.length, 5); i++) {
     var listItem = $('<button class="btn btn-primary btn-block mb-3 p-1" id="past-search"></button>').text(searchList[i]);
-    searchDisplay.prepend(listItem);
+    searchDisplay.append(listItem);
   }
 
   // ----------------------------------------------------------------------------------------
