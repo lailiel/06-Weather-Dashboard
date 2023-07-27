@@ -19,3 +19,8 @@ background-image: linear-gradient(to right, #465AB8 , #261360);
 #past-search {
     background-color: var(--previous);
 }
+
+#icon {
+    max-width: 80px;
+    max-height: 80px;
+}

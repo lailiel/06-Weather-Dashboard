@@ -2,20 +2,19 @@ $("#search").on("click", function () {
   generateForecast();
 });
 
-$("#clear").on("click", function() {
-    clearHistory();
+$("#clear").on("click", function () {
+  clearHistory();
 });
 
-
-$("#past-search").on("click", function() {
-    generateForecast();
-})
+$("#past-search").on("click", function () {
+  generateForecast();
+});
 
 // ----------------------------------------------------------------------------------------
 
-function clearHistory(){
-    localStorage.clear();
-    location.reload();
+function clearHistory() {
+  localStorage.clear();
+  location.reload();
 }
 
 // ----------------------------------------------------------------------------------------
@@ -24,8 +23,6 @@ function generateForecast() {
   var input = $("#input");
   var searchList = [];
   var searchDisplay = $("#search-list");
-
-
 
   searchList = JSON.parse(localStorage.getItem("searchList") || "[]");
 
@@ -40,7 +37,9 @@ function generateForecast() {
   searchDisplay.empty();
 
   for (var i = 0; i < Math.min(searchList.length, 5); i++) {
-    var listItem = $('<button class="btn btn-primary btn-block mb-3 p-1" id="past-search"></button>').text(searchList[i]);
+    var listItem = $(
+      '<button class="btn btn-primary btn-block mb-3 p-1" id="past-search"></button>'
+    ).text(searchList[i]);
     searchDisplay.append(listItem);
   }
 
@@ -65,33 +64,33 @@ function generateForecast() {
         }
       });
 
-    //   var currentDate= moment().format('L');
+      var dateElCurrent = $("#current").children().eq(0);
 
-    //   var dateElCurrent = $("#current").children().eq(0);
-      // var weatherIconElCurrent = $("#current").children(0)
-      // var tempElCurrent = $("#current").children(0))
-      // var windElCurrent = $("#current").children(0)
-      // var humidityElCurrent = $("#current").children(0)
+      var currentDate = new Date();
+      var formattedDate = currentDate.toLocaleDateString();
 
-      //     temp = `Temp: ${fiveDayData[i].main.temp.toFixed(2)}°F`;
-      //     tempElCurrent.text(temp)
+      dateElCurrent.text(cityName + " (" + formattedDate + ")");
 
-      //     wind = `Wind: ${fiveDayData[i].wind.speed}mph`;
-      //     windElCurrent.text(wind)
+      var weatherIconElCurrent = $("#current").children().eq(1);
+      var tempElCurrent = $("#current").children().eq(2);
+      var windElCurrent = $("#current").children().eq(3);
+      var humidityElCurrent = $("#current").children().eq(4);
 
-      //     humidity = `Humidity: ${fiveDayData[i].main.humidity}%`;
-      //     humidityElCurrent.text(humidity)
+      temp = `Temp: ${fiveDayData[0].main.temp.toFixed(2)}°F`;
+      tempElCurrent.text(temp);
 
-      // date = data.dt_txt.split(" ")[0].replaceAll("-", "/");
+      wind = `Wind: ${fiveDayData[0].wind.speed}mph`;
+      windElCurrent.text(wind);
 
-    //   dateElCurrent.text("test")
+      humidity = `Humidity: ${fiveDayData[0].main.humidity}%`;
+      humidityElCurrent.text(humidity);
 
-      //     weatherIcon = fiveDayData[i].weather[0].icon;
-      //     weatherIconElCurrent.attr("src", 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png')
+        weatherIcon = fiveDayData[0].weather[0].icon;
+        weatherIconElCurrent.attr("src", 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png')
 
       var days = 0;
 
-      for (i = 0; i < 7; i++) {
+      for (i = 0; i < 6; i++) {
         var dateEl = $("#future").children().eq(days).children().eq(0);
         var weatherIconEl = $("#future").children().eq(days).children().eq(1);
         var tempEl = $("#future").children().eq(days).children().eq(2);
@@ -107,9 +106,13 @@ function generateForecast() {
         humidity = `Humidity: ${fiveDayData[i].main.humidity}%`;
         humidityEl.text(humidity);
 
-        date = fiveDayData[i].dt_txt.split(" ")[0].replaceAll("-", "/");
+        var date = new Date();
+        
+        date.setDate(date.getDate()+ 1 +  i) 
 
-        dateEl.text(date);
+        var formattedDate = date.toLocaleDateString();
+
+        dateEl.text(formattedDate);
 
         weatherIcon = fiveDayData[i].weather[0].icon;
         weatherIconEl.attr(
