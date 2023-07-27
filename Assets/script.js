@@ -1,91 +1,107 @@
-
-$("#search").on('click', function () {
-
-    generateForecast()
-})
-
-
+$("#search").on("click", function () {
+  generateForecast();
+});
 
 // ----------------------------------------------------------------------------------------
 
-
-
-
 function generateForecast() {
+  var input = $("#input");
+  var searchList = [];
+  var searchDisplay = $("#search-list");
 
-    var input = $('#input')
-    var cityName = input.val();
-    var searchList = []
+  // ---------------------------
 
-    // ---------------------------
+  searchList = JSON.parse(localStorage.getItem("searchList") || "[]");
 
-    searchList = JSON.parse(localStorage.getItem("searchList") || "[]");
-    searchList.push(cityName)
+  var cityName = input.val().trim();
+  if (cityName !== "") {
+    searchList.push(cityName);
+  }
 
-    localStorage.setItem("searchList", JSON.stringify(searchList))
+  localStorage.setItem("searchList", JSON.stringify(searchList));
+  console.log(searchList);
 
-    var searchDisplay = JSON.parse(localStorage.getItem("searchList"));
+  searchDisplay.empty();
 
+  for (var i = 0; i < searchList.length; i++) {
+    var listItem = $('<li></li>').text(searchList[i]);
+    searchDisplay.prepend(listItem);
+  }
 
+  // ---------------------------
 
-    for (i = 0; i < searchDisplay.length; i++) {
-        var listItem = $('#search-list').appendChild("li")
-        listItem.textContent = cityName
-        displayList.appendChild(listItem)
-
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=acbf659b6dad995f4221a78b638e6923`;
+  fetch(weatherUrl).then(function (response) {
+    if (!response.ok) {
+      return response.json();
     }
+    response.json().then(function (data) {
+      console.log(data);
+      var fiveDayData = [];
+      console.log(fiveDayData);
+      data.list.forEach((element) => {
+        var queryTime = data.list[0].dt_txt;
+        var currentHour = new Date(queryTime).getHours();
+        var elementDate = new Date(element.dt_txt).getHours();
 
-    // ---------------------------
-
-
-
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=acbf659b6dad995f4221a78b638e6923`;
-    fetch(weatherUrl).then(function (response) {
-        if (!response.ok) {
-            return response.json();
+        if (elementDate === currentHour) {
+          fiveDayData.push(element);
         }
-        response.json().then(function (data) {
-            console.log(data);
-            var fiveDayData = [];
-            console.log(fiveDayData);
-            data.list.forEach((element) => {
-                var queryTime = data.list[0].dt_txt;
-                var currentHour = new Date(queryTime).getHours();
-                var elementDate = new Date(element.dt_txt).getHours();
+      });
 
-                if (elementDate === currentHour) {
-                    fiveDayData.push(element);
-                }
-            });
+      // var currentDate= moment().format('L');
 
-            var days = 0
+      // var dateElCurrent = $("#current").children(1)
+      // var weatherIconElCurrent = $("#current").children(2)
+      // var tempElCurrent = $("#current").children(3)
+      // var windElCurrent = $("#current").children(4)
+      // var humidityElCurrent = $("#current").children(5)
 
-            for (i = 0; i < 6; i++) {
+      //     temp = `Temp: ${fiveDayData[i].main.temp.toFixed(2)}°F`;
+      //     tempElCurrent.text(temp)
 
+      //     wind = `Wind: ${fiveDayData[i].wind.speed}mph`;
+      //     windElCurrent.text(wind)
 
-                var dateEl = $("#future").children().eq(days).children().eq(0)
-                var weatherIconEl = $("#future").children().eq(days).children().eq(1)
-                var tempEl = $("#future").children().eq(days).children().eq(2)
-                var windEl = $("#future").children().eq(days).children().eq(3)
-                var humidityEl = $("#future").children().eq(days).children().eq(4)
+      //     humidity = `Humidity: ${fiveDayData[i].main.humidity}%`;
+      //     humidityElCurrent.text(humidity)
 
+      // date = data.dt_txt.split(" ")[0].replaceAll("-", "/");
 
-                temp = `Temp: ${fiveDayData[i].main.temp.toFixed(2)}°F`;
-                tempEl.text(temp)
+      // dateElCurrent.text(currentDate)
 
-                wind = `Wind: ${fiveDayData[i].wind.speed}mph`;
-                windEl.text(wind)
+      //     weatherIcon = fiveDayData[i].weather[0].icon;
+      //     weatherIconElCurrent.attr("src", 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png')
 
-                humidity = `Humidity: ${fiveDayData[i].main.humidity}%`;
-                humidityEl.text(humidity)
+      var days = 0;
 
-                date = fiveDayData[i].dt_txt.split(" ")[0].replaceAll("-", "/");
-                dateEl.text(date)
+      for (i = 0; i < 6; i++) {
+        var dateEl = $("#future").children().eq(days).children().eq(0);
+        var weatherIconEl = $("#future").children().eq(days).children().eq(1);
+        var tempEl = $("#future").children().eq(days).children().eq(2);
+        var windEl = $("#future").children().eq(days).children().eq(3);
+        var humidityEl = $("#future").children().eq(days).children().eq(4);
 
-                weatherIcon = fiveDayData[i].weather[0].icon;
-                weatherIconEl.attr("src", 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png')
-                days++
-            }
-        });
+        temp = `Temp: ${fiveDayData[i].main.temp.toFixed(2)}°F`;
+        tempEl.text(temp);
+
+        wind = `Wind: ${fiveDayData[i].wind.speed}mph`;
+        windEl.text(wind);
+
+        humidity = `Humidity: ${fiveDayData[i].main.humidity}%`;
+        humidityEl.text(humidity);
+
+        date = fiveDayData[i].dt_txt.split(" ")[0].replaceAll("-", "/");
+
+        dateEl.text(date);
+
+        weatherIcon = fiveDayData[i].weather[0].icon;
+        weatherIconEl.attr(
+          "src",
+          "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
+        );
+        days++;
+      }
     });
+  });
 }

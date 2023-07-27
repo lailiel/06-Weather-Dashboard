@@ -23,17 +23,18 @@
             <input class="input-group w-100 mb-3" id="input" placeholder="San Diego"></input>
             <button class="btn btn-primary btn-block mb-3 p-1" id="search">Search</button>
             <ul class="search-history list-group border-top border-dark pt-3" id="search-list">
-                <li class="past-search list-group-item w-100 text-dark text-center p-1"></li>
+                
             </ul>
         </aside>
 
         <section class="col-8 weather">
             <div class="row current">
-                <div class="current border border-dark rounded-0 w-100 p-2">
-                    <h5 class="date">4/12 + icon</h5>
-                    <p class="temp m-0">temp:72</p>
-                    <p class="wind m-0">Wind: yes</p>
-                    <p class="humidity m-0">Humidity: 50%</p>
+                <div class="current border border-dark rounded-0 w-100 p-2" id="current">
+                    <h5 class="date"></h5>
+                    <image id="icon"></image>
+                    <p class="temp m-0">Temp</p>
+                    <p class="wind m-0">Wind:</p>
+                    <p class="humidity m-0">Humidity:</p>
                 </div>
             </div>
             <h4 class="my-2"> 5 Day Forecast:</h4>
