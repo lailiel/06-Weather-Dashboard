@@ -32,6 +32,10 @@ function generateForecast() {
   searchList = JSON.parse(localStorage.getItem("searchList") || "[]");
 
   if (cityName !== "") {
+    if (searchList.includes(cityName)){
+      var cityIndex = searchList.indexOf(cityName)
+      searchList.splice(cityIndex, 1)
+    }
     searchList.unshift(cityName);
   }
 
